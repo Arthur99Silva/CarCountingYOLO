@@ -27,7 +27,7 @@ while True:
     success, img = cap.read()
     imgRegion = cv2.bitwise_and(img, mask)
     
-    results = model(img, stream=True)
+    results = model(imgRegion, stream=True)
     for r in results:
         boxes = r.boxes
         for box in boxes:
