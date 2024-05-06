@@ -12,7 +12,7 @@ tracker = Sort(max_age=20, min_hits=3, iou_threshold=0.3)
 
 limits = [225, 400, 1020, 400]
 
-totalCount = 0
+totalCount = []
  
 model = YOLO("../Yolo-Weights/yolov8n.pt")
  
@@ -23,6 +23,9 @@ mask = cv2.imread("../CarCountingYOLO/CarCountingYOLO/mask2.png")
 while True:
     success, img = cap.read()
     imgRegion = cv2.bitwise_and(img, mask)
+
+    imgGraphics = cv2.imread("../CarCountingYOLO/CarCountingYOLO/graphics.png", cv2.IMREAD_UNCHANGED)
+    img = cvzone.overlayPNG(img, imgGraphics, (0, 0))
     
     results = model(imgRegion, stream=True)
 
@@ -66,9 +69,12 @@ while True:
         cv2.circle(img,(cx, cy), 5, (255, 0, 255), cv2.FILLED)
 
         if limits[0] < cx < limits[2] and limits[1] - 20 < cy < limits[1] + 20:
-            totalCount += 1
+            if totalCount.count(id) == 0:
+                totalCount.append(id)
+                cv2.line(img,(limits[0], limits[1]), (limits[2], limits[3]), (0, 255, 0), 5)
 
-    cvzone.putTextRect(img, f'Count: {totalCount}', (50, 50))
+    #cvzone.putTextRect(img, f'Count: {len(totalCount)}', (50, 50))
+    cv2.putText(img, str(len(totalCount)), (255, 100), cv2.FONT_HERSHEY_PLAIN, 5, (50, 50, 255), 8)
 
     cv2.imshow("Image", img)
     #cv2.imshow("ImageRegion", imgRegion)
