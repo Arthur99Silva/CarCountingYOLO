@@ -37,3 +37,5 @@ python Car-Counter.py
 Você pode ajustar os parâmetros do modelo YOLO, como confiança mínima (conf > 0.3) e classes detectadas, no código fonte.
 
 Você também pode modificar a linha de limite e seus pontos de referência conforme necessário.
+
+Com a ajuda dos cursos em https://www.murtazahassan.com/
