@@ -28,7 +28,7 @@ pip install -r requirements.txt
 
 1 - Execute o script Python car_counting.py:
 
-python car_counting.py
+python Car-Counter.py
 
 2 - O vídeo será carregado e os carros serão detectados e contados conforme cruzam a linha de limite especificada.
 
